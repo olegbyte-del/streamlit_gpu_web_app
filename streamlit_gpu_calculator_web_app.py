@@ -102,7 +102,7 @@ elif operation == "Train and Test a Deep Learning Model":
         
         # Loss and optimizer
         criterion = torch.nn.MSEloss()
-        optimizer = torch.optim.Adam(mode.pararmeters(), lr=0.01)
+        optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
         
         # Train the model
         epochs = 50
@@ -113,4 +113,13 @@ elif operation == "Train and Test a Deep Learning Model":
             loss.backward()
             optimizer.step()
             
-        st.success(f"Training complete! Final LOss:{loss.item():.4f}"
+        st.success(f"Training complete! Final LOss:{loss.item():.4f}")
+        
+        # Test the model
+        test_data = torch.rand(10, num_features, device="cuda")
+        test_predication = model(test_data)
+        st.write("Test Data:")
+        st.write(test_data.cpu().numpy())
+        
+        st.write("Predictions:")
+        st.write(test_predication.cpu().detach().numpy())

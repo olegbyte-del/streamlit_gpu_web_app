@@ -15,7 +15,7 @@ st.title("Streamlit App with GPU Computations")
 st.sidebar.header("Choose an Operation")
 operation = st.sidebar.selectbox("Select a computation:",
                                 ["Matrix Multiplication (Numpy)", "DataFrame Operations (Pandas)",
-                                "Tensor Computations (Pytorch)", "Tran and Test a Deep Learning Model"])
+                                "Tensor Computations (Pytorch)", "Train and Test a Deep Learning Model"])
 
 # Main app Functionality
 if operation == "Matrix Multiplication (Numpy)":
@@ -82,7 +82,7 @@ elif operation == "Tensor Computations (Pytorch)":
         st.write(result.cpu().numpy())
         
 elif operation == "Train and Test a Deep Learning Model":
-    st.header("Train and Test a Ddep Learning Model")
+    st.header("Train and Test a Deep Learning Model")
     
     # User input for dataset size
     num_sample = st.number_input("Number of Samples:", min_value=100, max_value=10000, value=1000)
@@ -92,3 +92,25 @@ elif operation == "Train and Test a Deep Learning Model":
         # Generate random data
         X = torch.rand(num_sample, num_features, device="cuda")
         y = torch.rand(X, dim=1) + torch.randn(num_sample, device = "cuda") * 0.1
+        
+        # Define a simple model
+        model = torch.nn.Sequential(
+            torch.nn.Linear(num_features, 50),
+            torch.nn.ReLU(),
+            torch.nn.Linear(50, 1)
+        ).to("cuda")
+        
+        # Loss and optimizer
+        criterion = torch.nn.MSEloss()
+        optimizer = torch.optim.Adam(mode.pararmeters(), lr=0.01)
+        
+        # Train the model
+        epochs = 50
+        for epoch in range(epochs):
+            optimizer.zero_grad()
+            predictions = model(X)
+            loss = criterion(predictions.squeeze(), y)
+            loss.backward()
+            optimizer.step()
+            
+        st.success(f"Training complete! Final LOss:{loss.item():.4f}"

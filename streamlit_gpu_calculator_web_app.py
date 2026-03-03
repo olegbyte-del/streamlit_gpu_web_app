@@ -41,7 +41,7 @@ elif operation == "DataFrame Operations (Pandas)":
     st.header("DataFrame Operations with Pandas")
     
     # Generate a random DataFrame
-    rows = st.number_input("Number of rows:", min_value = 0, max_value=1000, value=10)
+    rows = st.number_input("Number of rows:", min_value=0, max_value=1000, value=10)
     
     if st.button("Generate DataFrame"):
         df = pd.DataFrame(np.random.rand(rows, 5),
@@ -86,7 +86,7 @@ elif operation == "Train and Test a Deep Learning Model":
     if st.button("Train Model"):
         # Generate random data
         X = torch.rand(num_samples, num_features, device="cuda")
-        y = torch.sum(X, dim=1) + torch.randn(num_samples, device = "cuda") * 0.1
+        y = torch.sum(X, dim=1) + torch.randn(num_samples, device="cuda") * 0.1
         
         # Define a simple model
         model = torch.nn.Sequential(

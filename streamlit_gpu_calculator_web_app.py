@@ -37,7 +37,7 @@ if operation == "Matrix Multiplication (Numpy)":
         st.write(matrix_a)
         
         st.write("Matrix B:")
-        st.wrtie(matrix_b)
+        st.write(matrix_b)
         
         st.write("Resultant Matrix:")
         st.write(result)
@@ -49,11 +49,34 @@ elif operation == "DataFrme Operations (Pandas)":
     rows = st.number_input("Number of rows:", min_value = 0, max_value = 1000, value = 10)
     
     if st.button("Generate DataFrame"):
-        df = pd.DataFrame(np.random.rand(rows, 5))
-        columns= ["A", "B", "C", "D", "E"]
+        df = pd.DataFrame(np.random.rand(rows, 5),
+        columns= ["A", "B", "C", "D", "E"])
 
         st.write("Randomly Generated DataFrame:")
         st.write(df)
         
         st.write("Column Summaries:")
         st.write(df.describe())
+    
+elif operation == "Tensor Computations (PyTorch)":
+    st.header("Tesnor Computations with PyTorch")
+    
+    #Tensor size input
+    tensor_size = st.number_input("Tensor size:", min_value = 1, max_value = 10000, value = 3)
+    
+    if st.button("Generate Tensor and Compute"):
+        # Generate random tensor on GPU
+        tensor_a = torch.rand(tensor_size, tensor_size, device="cuda")
+        tensor_b = torch.rand(tensor_size, tensor_size, device="cuda")
+        
+        # Perform matrix multiplication on GPU
+        result = torch.matmul(tensor_a, tensor_b)
+        
+        st.write("Tensor A:")
+        st.write(tensor_b.cpu().numpy())
+        
+        st.write("Tensor B:")
+        st.write(tensor_b.cpu().numpy())
+        
+        st.write("Resultant Tensor:")
+        st.write(result.cpu().numpy())

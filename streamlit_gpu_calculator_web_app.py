@@ -18,7 +18,7 @@ if operation == "Matrix Multiplication (Numpy)":
     
     # User inputs for matrix dimensionss
     rows = st.number_input("Number of rows:", min_value=1, max_value=1000, value=3)
-    cols = st.number_input("Number of columns", min_value=1, max_value=1000, value=3)
+    cols = st.number_input("Number of columns:", min_value=1, max_value=1000, value=3)
     
     if st.button("Generate and Multiply Matrices"):
         # Generate random matrices
@@ -56,7 +56,7 @@ elif operation == "DataFrame Operations (Pandas)":
 elif operation == "Tensor Computations (Pytorch)":
     st.header("Tensor Computations with Pytorch")
     
-    #Tensor size input
+    # Tensor size input
     tensor_size = st.number_input("Tensor size:", min_value=1, max_value=10000, value=3)
     
     if st.button("Generate Tensor and Compute"):
@@ -108,13 +108,13 @@ elif operation == "Train and Test a Deep Learning Model":
             loss.backward()
             optimizer.step()
             
-        st.success(f"Training complete! Final LOss:{loss.item():.4f}")
+        st.success(f"Training complete! Final Loss:{loss.item():.4f}")
         
         # Test the model
         test_data = torch.rand(10, num_features, device="cuda")
-        test_predication = model(test_data)
+        test_prediction = model(test_data)
         st.write("Test Data:")
         st.write(test_data.cpu().numpy())
         
         st.write("Predictions:")
-        st.write(test_predication.cpu().detach().numpy())
+        st.write(test_prediction.cpu().detach().numpy())

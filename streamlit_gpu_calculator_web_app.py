@@ -1,8 +1,3 @@
-# Download necessary prerequisites
-# 1. Ubuntu 22.04 Cloud GPU Server
-# 2. Cuda Toolkit and cuDNN installed
-# 3. Root or Sudo 
-
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -21,7 +16,7 @@ operation = st.sidebar.selectbox("Select a computation:",
 if operation == "Matrix Multiplication (Numpy)":
     st.header("Matrix Multiplication with Numpy")
     
-    # User inputs for matrix dimensions
+    # User inputs for matrix dimensionss
     rows = st.number_input("Number of rows:", min_value=1, max_value=1000, value=3)
     cols = st.number_input("Number of columns", min_value=1, max_value=1000, value=3)
     
@@ -85,13 +80,13 @@ elif operation == "Train and Test a Deep Learning Model":
     st.header("Train and Test a Deep Learning Model")
     
     # User input for dataset size
-    num_sample = st.number_input("Number of Samples:", min_value=100, max_value=10000, value=1000)
-    num_features = st.number_input("Number of Features:", min_value=100, max_value=100, value=10)
+    num_samples = st.number_input("Number of Samples:", min_value=100, max_value=10000, value=1000)
+    num_features = st.number_input("Number of Features:", min_value=1, max_value=100, value=10)
     
     if st.button("Train Model"):
         # Generate random data
-        X = torch.rand(num_sample, num_features, device="cuda")
-        y = torch.rand(X, dim=1) + torch.randn(num_sample, device = "cuda") * 0.1
+        X = torch.rand(num_samples, num_features, device="cuda")
+        y = torch.sum(X, dim=1) + torch.randn(num_samples, device = "cuda") * 0.1
         
         # Define a simple model
         model = torch.nn.Sequential(
@@ -101,7 +96,7 @@ elif operation == "Train and Test a Deep Learning Model":
         ).to("cuda")
         
         # Loss and optimizer
-        criterion = torch.nn.MSEloss()
+        criterion = torch.nn.MSELoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
         
         # Train the model

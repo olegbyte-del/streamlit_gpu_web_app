@@ -22,8 +22,8 @@ if operation == "Matrix Multiplication (Numpy)":
     st.header("Matrix Multiplication with Numpy")
     
     # User inputs for matrix dimensions
-    rows = st.number_input("Number of rows:", min_value = 1, max_value =  1000, value = 3)
-    cols = st.number_input("Number of columns", min_value = 1, max_value= 1000, value = 3)
+    rows = st.number_input("Number of rows:", min_value=1, max_value=1000, value=3)
+    cols = st.number_input("Number of columns", min_value=1, max_value=1000, value=3)
     
     if st.button("Generate and Multiply Matrices"):
         # Generate random matrices
@@ -42,11 +42,11 @@ if operation == "Matrix Multiplication (Numpy)":
         st.write("Resultant Matrix:")
         st.write(result)
         
-elif operation == "DataFrme Operations (Pandas)":
+elif operation == "DataFrame Operations (Pandas)":
     st.header("DataFrame Operations with Pandas")
     
     # Generate a random DataFrame
-    rows = st.number_input("Number of rows:", min_value = 0, max_value = 1000, value = 10)
+    rows = st.number_input("Number of rows:", min_value = 0, max_value=1000, value=10)
     
     if st.button("Generate DataFrame"):
         df = pd.DataFrame(np.random.rand(rows, 5),
@@ -58,11 +58,11 @@ elif operation == "DataFrme Operations (Pandas)":
         st.write("Column Summaries:")
         st.write(df.describe())
     
-elif operation == "Tensor Computations (PyTorch)":
-    st.header("Tesnor Computations with PyTorch")
+elif operation == "Tensor Computations (Pytorch)":
+    st.header("Tensor Computations with Pytorch")
     
     #Tensor size input
-    tensor_size = st.number_input("Tensor size:", min_value = 1, max_value = 10000, value = 3)
+    tensor_size = st.number_input("Tensor size:", min_value=1, max_value=10000, value=3)
     
     if st.button("Generate Tensor and Compute"):
         # Generate random tensor on GPU
@@ -73,10 +73,22 @@ elif operation == "Tensor Computations (PyTorch)":
         result = torch.matmul(tensor_a, tensor_b)
         
         st.write("Tensor A:")
-        st.write(tensor_b.cpu().numpy())
+        st.write(tensor_a.cpu().numpy())
         
         st.write("Tensor B:")
         st.write(tensor_b.cpu().numpy())
         
         st.write("Resultant Tensor:")
         st.write(result.cpu().numpy())
+        
+elif operation == "Train and Test a Deep Learning Model":
+    st.header("Train and Test a Ddep Learning Model")
+    
+    # User input for dataset size
+    num_sample = st.number_input("Number of Samples:", min_value=100, max_value=10000, value=1000)
+    num_features = st.number_input("Number of Features:", min_value=100, max_value=100, value=10)
+    
+    if st.button("Train Model"):
+        # Generate random data
+        X = torch.rand(num_sample, num_features, device="cuda")
+        y = torch.rand(X, dim=1) + torch.randn(num_sample, device = "cuda") * 0.1
